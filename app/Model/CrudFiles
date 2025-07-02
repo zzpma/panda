@@ -1,0 +1,30 @@
+<?php
+App::uses('AppModel', 'Model');
+
+class CrudFile extends AppModel {
+    public $useTable = 'crud_files'; // Explicitly set the table name
+    public $primaryKey = 'id';
+
+    public $belongsTo = array(
+        'Crud' => array(
+            'className' => 'Crud',
+            'foreignKey' => 'crud_id',
+            'dependent' => true
+        )
+    );
+
+    public $validate = array(
+        'file_name' => array(
+            'notEmpty' => array(
+                'rule' => 'notEmpty',
+                'message' => 'File name cannot be empty'
+            )
+        ),
+        'file_path' => array(
+            'notEmpty' => array(
+                'rule' => 'notEmpty',
+                'message' => 'File path cannot be empty'
+            )
+        )
+    );
+}
